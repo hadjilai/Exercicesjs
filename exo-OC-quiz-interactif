@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Quiz interactif</title>
+</head>
+
+<body>
+    <div id="contenu"></div>
+
+    <script >
+	// Liste des questions à afficher. Une question est définie par son énoncé et sa réponse
+var questions = [
+    {
+        enonce: "Combien font 2+2 ?",
+        reponse: "2+2 = 4"
+    },
+    {
+        enonce: "En quelle année Christophe Colomb a-t-il découvert l'Amérique ?",
+        reponse: "1492"
+    },
+    {
+        enonce: "On me trouve 2 fois dans l'année, 1 fois dans la semaine, mais pas du tout dans le jour... Qui suis-je ?",
+        reponse: "La lettre N"
+    }
+];
+	for(var i=0; i<questions.length;i++)
+	{
+	var para=document.createElement("p");
+	para.innerHTML='<strong> question'+ i +'</strong>:<span>'+questions[i].enonce +'</span><br/><button>afficher le resultat</button>';
+	document.getElementById("contenu").appendChild(para);
+	}
+	var quiz=document.querySelectorAll('button');
+	var enonce=document.querySelectorAll('span');
+	
+	quiz.forEach(element=>
+	 element.addEventListener("click",function (){
+	 
+	for(var i=0;i<questions.length;i++)
+	{if(questions[i].enonce==element.parentNode.childNodes[2].textContent)
+	{var newNode=document.createElement("span");
+	newNode.textContent=questions[i].reponse;
+	element.parentNode.replaceChild(newNode,element);
+	}
+	else
+	{}
+	}})
+	);
+	</script>
+</body>
+
+</html>
