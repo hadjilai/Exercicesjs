@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--link rel="stylesheet" href="../css/personnages.css"-->
+    <title>Maisons et personnages</title>
+</head>
+
+<body>
+    <h1>Quelques personnages de Game of Thrones</h1>
+    <form>
+        <label for="maison">Maison</label> :
+        <select name="maison" id="maison">
+            <option value="" selected>Choisissez une maison</option>
+        </select>
+    </form>
+
+    <p>
+        <ul id="persos"></ul>
+    </p>
+
+    <script >
+	
+	// Liste de quelques maisons de Game of Thrones. Chaque maison a un code et un nom
+var maisons = [
+    {
+        code: "ST",
+        nom: "Stark"
+    },
+    {
+        code: "LA",
+        nom: "Lannister"
+    },
+    {
+        code: "BA",
+        nom: "Baratheon"
+    },
+    {
+        code: "TA",
+        nom: "Targaryen"
+    }
+];
+
+// Renvoie un tableau contenant quelques personnages d'une maison
+function getPersonnages(codeMaison) {
+    switch (codeMaison) {
+    case "ST":
+        return ["Eddard", "Catelyn", "Robb", "Sansa", "Arya", "Jon Snow"];
+    case "LA":
+        return ["Tywin", "Cersei", "Jaime", "Tyrion"];
+    case "BA":
+        return ["Robert", "Stannis", "Renly"];
+    case "TA":
+        return ["Aerys", "Daenerys", "Viserys"];
+    default:
+        return [];
+    }
+}
+	
+	var maison=document.getElementById("maison");
+	var persos=document.getElementById("persos");
+	
+	for(var i=0;i<maisons.length;i++)
+	{
+	var newElement=document.createElement("option");
+	newElement.textContent=maisons[i].nom;
+	maison.appendChild(newElement);
+	}
+	maison.addEventListener("change", function (e) {
+	var selected=e.target.value;
+	for (var j=0;j<maisons.length;j++)
+	{
+	if(selected==maisons[j].nom)
+	{  var personnages=getPersonnages(maisons[j].code); }
+	}
+	persos.innerHTML=" ";
+	for (var k=0;k<personnages.length;k++)
+	{  var li=document.createElement('li');
+	li.textContent=personnages[k];
+	
+	persos.appendChild(li);
+	}
+	});
+	</script>
+</body>
+
+</html>
